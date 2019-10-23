@@ -1,0 +1,19 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+
+entity tb is
+	generic(N : integer := 32);
+	port(inputa : in std_logic_vector(N-1 downto 0);
+	     inputb : in std_logic_vector(N-1 downto 0);
+	     selector : std_logic;
+	     outputa : out std_logic_vector(N-1 downto 0);
+	     outputb : out std_logic_vector(N-1 downto 0));
+end tb;
+
+architecture structure of tb is
+
+begin
+HA1 : entity work.NBitMux port map (inputa,inputb,selector, outputa);
+HA2 : entity work.NBitMuxSel port map(inputa,inputb,selector, outputb);
+end structure;

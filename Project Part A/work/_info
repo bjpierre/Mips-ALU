@@ -1,0 +1,1085 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dU:/WorkSpaces/CPRe381/Project Part A
+Eadder1b
+Z1 w1570982606
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+R0
+Z4 8U:/WorkSpaces/CPRe381/Project Part A/adder1b.vhd
+Z5 FU:/WorkSpaces/CPRe381/Project Part A/adder1b.vhd
+l0
+L5
+V01k>EPbJXI^b?jJ;Z1n6E1
+!s100 ^Kg2W6QPMVNl5A?9:1STI0
+Z6 OP;C;10.7b;67
+32
+Z7 !s110 1570992717
+!i10b 1
+Z8 !s108 1570992717.000000
+Z9 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/adder1b.vhd|
+Z10 !s107 U:/WorkSpaces/CPRe381/Project Part A/adder1b.vhd|
+!i113 1
+Z11 o-work work
+Z12 tExplicit 1 CvgOpt 0
+Astructural
+R2
+R3
+Z13 DEx4 work 7 adder1b 0 22 01k>EPbJXI^b?jJ;Z1n6E1
+l12
+L11
+V@:1>lbdQkzOiS8W]jiPhI0
+!s100 MQQPcXoWiS?YaA?<<NRao2
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Ealu32
+Z14 w1570994539
+R2
+R3
+R0
+Z15 8U:/WorkSpaces/CPRe381/Project Part A/alu32.vhd
+Z16 FU:/WorkSpaces/CPRe381/Project Part A/alu32.vhd
+l0
+L14
+VT3P3m@N8oIBCM4iWX_6e43
+!s100 :7fCCOgekiY9YW=WZ7C`52
+R6
+32
+Z17 !s110 1570994942
+!i10b 1
+Z18 !s108 1570994942.000000
+Z19 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/alu32.vhd|
+Z20 !s107 U:/WorkSpaces/CPRe381/Project Part A/alu32.vhd|
+!i113 1
+R11
+R12
+Astructure
+R2
+R3
+DEx4 work 5 alu32 0 22 T3P3m@N8oIBCM4iWX_6e43
+l63
+L25
+VogB53BU1@1UP[bYl]F?om3
+!s100 dAHBh5=M7@8Sd6lRX:_[i0
+R6
+32
+R17
+!i10b 1
+R18
+R19
+R20
+!i113 1
+R11
+R12
+Eandg2
+Z21 w1558467780
+R2
+R3
+R0
+Z22 8U:/WorkSpaces/CPRe381/Project Part A/andg2.vhd
+Z23 FU:/WorkSpaces/CPRe381/Project Part A/andg2.vhd
+l0
+L23
+VQ@<<<@nlJ=eiIl4BJDFzW2
+!s100 YT?bGzEmcFo:DlnoC^B4_0
+R6
+32
+Z24 !s110 1570992718
+!i10b 1
+Z25 !s108 1570992718.000000
+Z26 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/andg2.vhd|
+Z27 !s107 U:/WorkSpaces/CPRe381/Project Part A/andg2.vhd|
+!i113 1
+R11
+R12
+Adataflow
+R2
+R3
+Z28 DEx4 work 5 andg2 0 22 Q@<<<@nlJ=eiIl4BJDFzW2
+l32
+L31
+VJVOzCk?IH:iJ5bCRU`CK13
+!s100 I`@Z@UBObS]<7m8bPgKUS1
+R6
+32
+R24
+!i10b 1
+R25
+R26
+R27
+!i113 1
+R11
+R12
+Ebarrel32
+Z29 w1570982614
+R2
+R3
+R0
+Z30 8U:/WorkSpaces/CPRe381/Project Part A/barrel32.vhd
+Z31 FU:/WorkSpaces/CPRe381/Project Part A/barrel32.vhd
+l0
+L4
+V2^=hhKm=TkIj7K;7bTkR71
+!s100 aDAe<TVo[gaXg00Se93XO1
+R6
+32
+R24
+!i10b 1
+R25
+Z32 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/barrel32.vhd|
+Z33 !s107 U:/WorkSpaces/CPRe381/Project Part A/barrel32.vhd|
+!i113 1
+R11
+R12
+Astructural
+R2
+R3
+DEx4 work 8 barrel32 0 22 2^=hhKm=TkIj7K;7bTkR71
+l21
+L11
+V:U2C2DM0J`djRYcIX7R351
+!s100 7U?SNHM9A8]P2ekh?j?f`0
+R6
+32
+R24
+!i10b 1
+R25
+R32
+R33
+!i113 1
+R11
+R12
+Ebigalu
+Z34 w1570982616
+R2
+R3
+R0
+Z35 8U:/WorkSpaces/CPRe381/Project Part A/bigALU.vhd
+Z36 FU:/WorkSpaces/CPRe381/Project Part A/bigALU.vhd
+l0
+L10
+V]:Pmg6Fz__c3nF<HcocjS0
+!s100 QDBgW>Y3eL=YldAEQ8F<V1
+R6
+32
+Z37 !s110 1570992719
+!i10b 1
+R25
+Z38 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/bigALU.vhd|
+Z39 !s107 U:/WorkSpaces/CPRe381/Project Part A/bigALU.vhd|
+!i113 1
+R11
+R12
+Astructure
+Z40 DEx4 work 6 mux8_1 0 22 ;dPWB^ZheIROKCKh7@Ah:2
+Z41 DEx4 work 7 two2one 0 22 o@Cek:d]=zA58cNDeGUC;1
+Z42 DEx4 work 4 invg 0 22 Q?6hb9ePk@>kZZ9k]hNSO3
+Z43 DEx4 work 4 org2 0 22 [C`FCj=kL0CTBYLlbjJzD3
+R28
+Z44 DEx4 work 5 xorg2 0 22 ;hb`C0MKik;h36`3`SzM60
+Z45 DEx4 work 5 sub1b 0 22 OWaDK<fQ=YQkTRRmfK9=?3
+R13
+R2
+R3
+DEx4 work 6 bigalu 0 22 ]:Pmg6Fz__c3nF<HcocjS0
+l24
+L21
+V?P`eiaQF:;ckhQVEBYT;I0
+!s100 m?KGCBClE2=OcRFnE^G2^0
+R6
+32
+R37
+!i10b 1
+R25
+R38
+R39
+!i113 1
+R11
+R12
+Ede5to32
+Z46 w1570991874
+R2
+R3
+R0
+Z47 8U:/WorkSpaces/CPRe381/Project Part A/de5to32.vhd
+Z48 FU:/WorkSpaces/CPRe381/Project Part A/de5to32.vhd
+l0
+L21
+VJZPHbPc3N06>Xnn6cQEmG0
+!s100 5VVS5Xh;MW?JmA9H4S01a0
+R6
+32
+R37
+!i10b 1
+Z49 !s108 1570992719.000000
+Z50 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/de5to32.vhd|
+Z51 !s107 U:/WorkSpaces/CPRe381/Project Part A/de5to32.vhd|
+!i113 1
+R11
+R12
+Abehavior
+R2
+R3
+DEx4 work 7 de5to32 0 22 JZPHbPc3N06>Xnn6cQEmG0
+l28
+L27
+VGJ80leC5@AGK<[B<Gz8?i0
+!s100 DDFUWa3kijDhNC2HWo^z:3
+R6
+32
+R37
+!i10b 1
+R49
+R50
+R51
+!i113 1
+R11
+R12
+Edff
+R21
+R2
+R3
+R0
+Z52 8U:/WorkSpaces/CPRe381/Project Part A/dff.vhd
+Z53 FU:/WorkSpaces/CPRe381/Project Part A/dff.vhd
+l0
+L21
+V<R:lmjjDXa`]L14ceUIAn3
+!s100 mT_OLTf8f1nD0BMVi`22Q3
+R6
+32
+R37
+!i10b 1
+R49
+Z54 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/dff.vhd|
+Z55 !s107 U:/WorkSpaces/CPRe381/Project Part A/dff.vhd|
+!i113 1
+R11
+R12
+Amixed
+R2
+R3
+DEx4 work 3 dff 0 22 <R:lmjjDXa`]L14ceUIAn3
+l35
+L31
+VMe1[^^c?@jk=`6K1ZJFGM0
+!s100 j3C[YCFRW8M@3<JaVm8?<1
+R6
+32
+R37
+!i10b 1
+R49
+R54
+R55
+!i113 1
+R11
+R12
+Eextender632
+Z56 w1568761360
+R2
+R3
+R0
+Z57 8U:/WorkSpaces/CPRe381/Project Part A/extender632.vhd
+Z58 FU:/WorkSpaces/CPRe381/Project Part A/extender632.vhd
+l0
+L4
+V7n=H8VH=@EMJi]6_]eETd0
+!s100 UcgJ=1U7kJiG=`^68GV`F1
+R6
+32
+R37
+!i10b 1
+R49
+Z59 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/extender632.vhd|
+Z60 !s107 U:/WorkSpaces/CPRe381/Project Part A/extender632.vhd|
+!i113 1
+R11
+R12
+Aericsaysyoucanuseanythinghere
+R2
+R3
+DEx4 work 11 extender632 0 22 7n=H8VH=@EMJi]6_]eETd0
+l12
+L10
+V^UH<2@_m4W]cS<]Lg3EQL3
+!s100 K`[87zT0IoAR^:G:OIE^>2
+R6
+32
+R37
+!i10b 1
+R49
+R59
+R60
+!i113 1
+R11
+R12
+Efinalbits
+Z61 w1570990276
+R2
+R3
+R0
+Z62 8U:/WorkSpaces/CPRe381/Project Part A/finalBits.vhd
+Z63 FU:/WorkSpaces/CPRe381/Project Part A/finalBits.vhd
+l0
+L10
+V4GXj@]kgNDNFCKTmnmOhn0
+!s100 mHiY7N]acdAGlQ95mhABI0
+R6
+32
+R37
+!i10b 1
+R49
+Z64 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/finalBits.vhd|
+Z65 !s107 U:/WorkSpaces/CPRe381/Project Part A/finalBits.vhd|
+!i113 1
+R11
+R12
+Astructure
+R40
+R41
+R42
+R43
+R28
+R44
+R45
+R13
+R2
+R3
+DEx4 work 9 finalbits 0 22 4GXj@]kgNDNFCKTmnmOhn0
+l25
+L22
+VYlF79SHQZZ1Rj85f8[O=C2
+!s100 OBMf?m2dzoUPVNoHnkJlO0
+R6
+32
+R37
+!i10b 1
+R49
+R64
+R65
+!i113 1
+R11
+R12
+Einvg
+R21
+R2
+R3
+R0
+Z66 8U:/WorkSpaces/CPRe381/Project Part A/invg.vhd
+Z67 FU:/WorkSpaces/CPRe381/Project Part A/invg.vhd
+l0
+L23
+VQ?6hb9ePk@>kZZ9k]hNSO3
+!s100 _XK?_^5z0Rm1<k12?;5R?2
+R6
+32
+Z68 !s110 1570992720
+!i10b 1
+R49
+Z69 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/invg.vhd|
+Z70 !s107 U:/WorkSpaces/CPRe381/Project Part A/invg.vhd|
+!i113 1
+R11
+R12
+Adataflow
+R2
+R3
+R42
+l31
+L30
+Vch>li:oKYZkCO5]GamViK1
+!s100 bk7I76o8e1LURdoZEQb8H0
+R6
+32
+R68
+!i10b 1
+R49
+R69
+R70
+!i113 1
+R11
+R12
+Emem
+R21
+Z71 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+R2
+R3
+R0
+Z72 8U:/WorkSpaces/CPRe381/Project Part A/mem.vhd
+Z73 FU:/WorkSpaces/CPRe381/Project Part A/mem.vhd
+l0
+L8
+Vl8<PCiN;cU;BN3M[A<;IE3
+!s100 fRlcaiTJZJ1H;nZh;8=LI3
+R6
+32
+R68
+!i10b 1
+Z74 !s108 1570992720.000000
+Z75 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/mem.vhd|
+Z76 !s107 U:/WorkSpaces/CPRe381/Project Part A/mem.vhd|
+!i113 1
+R11
+R12
+Artl
+R71
+R2
+R3
+DEx4 work 3 mem 0 22 l8<PCiN;cU;BN3M[A<;IE3
+l37
+L27
+V`6^NbPhKNmSBg:`:Un8;g3
+!s100 OI8_3><BhDkT3l3n8`OXd3
+R6
+32
+R68
+!i10b 1
+R74
+R75
+R76
+!i113 1
+R11
+R12
+Emux
+Z77 w1567555728
+R2
+R3
+R0
+Z78 8U:/WorkSpaces/CPRe381/Project Part A/Mux.vhd
+Z79 FU:/WorkSpaces/CPRe381/Project Part A/Mux.vhd
+l0
+L4
+Via=0CZHH>6>0ada[hjhKR1
+!s100 <VPHk>3Vn;]A>j`g=9_Vm3
+R6
+32
+Z80 !s110 1570992906
+!i10b 1
+Z81 !s108 1570992906.000000
+Z82 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/Mux.vhd|
+Z83 !s107 U:/WorkSpaces/CPRe381/Project Part A/Mux.vhd|
+!i113 1
+R11
+R12
+Astructure
+R2
+R3
+DEx4 work 3 mux 0 22 ia=0CZHH>6>0ada[hjhKR1
+l28
+L12
+VMzdbCie`KH^lzD9;@7dk20
+!s100 dfHV`A>I=QTm_58j_g?8X0
+R6
+32
+R80
+!i10b 1
+R81
+R82
+R83
+!i113 1
+R11
+R12
+Emux32
+Z84 w1570991987
+R2
+R3
+R0
+Z85 8U:/WorkSpaces/CPRe381/Project Part A/mux32.vhd
+Z86 FU:/WorkSpaces/CPRe381/Project Part A/mux32.vhd
+l0
+L21
+V^<>83ULI>`8fJF9C8Gn=k0
+!s100 `0CnDn7LiWaQY96j:jKW00
+R6
+32
+Z87 !s110 1570992721
+!i10b 1
+R74
+Z88 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/mux32.vhd|
+Z89 !s107 U:/WorkSpaces/CPRe381/Project Part A/mux32.vhd|
+!i113 1
+R11
+R12
+Abehavior
+R2
+R3
+DEx4 work 5 mux32 0 22 ^<>83ULI>`8fJF9C8Gn=k0
+l29
+L28
+V;_PSXlA9:04Iill[[khdz3
+!s100 H[@_0g87AjY5=h:AnRWcX3
+R6
+32
+R87
+!i10b 1
+R74
+R88
+R89
+!i113 1
+R11
+R12
+Emux8_1
+Z90 w1570982632
+R2
+R3
+R0
+Z91 8U:/WorkSpaces/CPRe381/Project Part A/mux8_1.vhd
+Z92 FU:/WorkSpaces/CPRe381/Project Part A/mux8_1.vhd
+l0
+L14
+V;dPWB^ZheIROKCKh7@Ah:2
+!s100 9_JSP_H?72c6L:H:T@U?@0
+R6
+32
+R68
+!i10b 1
+R74
+Z93 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/mux8_1.vhd|
+Z94 !s107 U:/WorkSpaces/CPRe381/Project Part A/mux8_1.vhd|
+!i113 1
+R11
+R12
+Abehavior
+R2
+R3
+R40
+l21
+L20
+V>3_>fBU1?]?1o1DJVz5Fc3
+!s100 oP;Lh9i]MC:@lP64f9G>J0
+R6
+32
+R68
+!i10b 1
+R74
+R93
+R94
+!i113 1
+R11
+R12
+Enbitand
+R90
+R2
+R3
+R0
+Z95 8U:/WorkSpaces/CPRe381/Project Part A/nBitAnd.vhd
+Z96 FU:/WorkSpaces/CPRe381/Project Part A/nBitAnd.vhd
+l0
+L13
+V0jI[O8lkLm=lUbVK:2jU43
+!s100 P2e6fE5EXZbVeHGheeSkK2
+R6
+32
+R87
+!i10b 1
+Z97 !s108 1570992721.000000
+Z98 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/nBitAnd.vhd|
+Z99 !s107 U:/WorkSpaces/CPRe381/Project Part A/nBitAnd.vhd|
+!i113 1
+R11
+R12
+Astructure
+R2
+R3
+DEx4 work 7 nbitand 0 22 0jI[O8lkLm=lUbVK:2jU43
+l27
+L19
+VXjN^_bRX96W]=b17ejG2=0
+!s100 jGdRSMaaM[kWKL>H7P7d63
+R6
+32
+R87
+!i10b 1
+R97
+R98
+R99
+!i113 1
+R11
+R12
+Enmux
+Z100 w1570993293
+R2
+R3
+R0
+Z101 8U:/WorkSpaces/CPRe381/Project Part A/nmux.vhd
+Z102 FU:/WorkSpaces/CPRe381/Project Part A/nmux.vhd
+l0
+L13
+V=LGfDi`LHaF^lk5=7fD791
+!s100 d`D=1B:^JFl^]a8@BzUXI1
+R6
+32
+Z103 !s110 1570993409
+!i10b 1
+Z104 !s108 1570993409.000000
+Z105 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/nmux.vhd|
+Z106 !s107 U:/WorkSpaces/CPRe381/Project Part A/nmux.vhd|
+!i113 1
+R11
+R12
+Astructure
+R2
+R3
+DEx4 work 4 nmux 0 22 =LGfDi`LHaF^lk5=7fD791
+l21
+L20
+V1h^M8:him?l7?j2aPmml?0
+!s100 h:;gI^CP@zOH`ib_ANACT3
+R6
+32
+R103
+!i10b 1
+R104
+R105
+R106
+!i113 1
+R11
+R12
+Enmux8_1
+R90
+R2
+R3
+R0
+Z107 8U:/WorkSpaces/CPRe381/Project Part A/nmux8_1.vhd
+Z108 FU:/WorkSpaces/CPRe381/Project Part A/nmux8_1.vhd
+l0
+L13
+VZ6LRZZPc=B3ZA>:b8;LBV2
+!s100 TEaOnomek`zJX>`]HhRnJ2
+R6
+32
+R87
+!i10b 1
+R97
+Z109 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/nmux8_1.vhd|
+Z110 !s107 U:/WorkSpaces/CPRe381/Project Part A/nmux8_1.vhd|
+!i113 1
+R11
+R12
+Astructure
+R2
+R3
+DEx4 work 7 nmux8_1 0 22 Z6LRZZPc=B3ZA>:b8;LBV2
+l26
+L19
+VA4KmV;RIEOiEO^bKe;hgi1
+!s100 8F`imWPkzYA@Q7eR:_Clk2
+R6
+32
+R87
+!i10b 1
+R97
+R109
+R110
+!i113 1
+R11
+R12
+Enor32
+R90
+R2
+R3
+R0
+Z111 8U:/WorkSpaces/CPRe381/Project Part A/nor32.vhd
+Z112 FU:/WorkSpaces/CPRe381/Project Part A/nor32.vhd
+l0
+L4
+V]fdoSORfZA?KSRI8:^3QD2
+!s100 43bC8H4XY@WTOU4TMR<W>0
+R6
+32
+Z113 !s110 1570992722
+!i10b 1
+R97
+Z114 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/nor32.vhd|
+Z115 !s107 U:/WorkSpaces/CPRe381/Project Part A/nor32.vhd|
+!i113 1
+R11
+R12
+Astructure
+R2
+R3
+DEx4 work 5 nor32 0 22 ]fdoSORfZA?KSRI8:^3QD2
+l12
+L9
+V?I;[F@U;oCBCF1J8Rbze^0
+!s100 Hb9IKARTJZi;f7;Hd043[1
+R6
+32
+R113
+!i10b 1
+R97
+R114
+R115
+!i113 1
+R11
+R12
+Enreg
+Z116 w1570984630
+R2
+R3
+R0
+Z117 8U:/WorkSpaces/CPRe381/Project Part A/nreg.vhd
+Z118 FU:/WorkSpaces/CPRe381/Project Part A/nreg.vhd
+l0
+L21
+ViDOX=g]E`nj3bCS9IMhSa2
+!s100 NFXKh1Cb;B:c_]B=`j>Zd3
+R6
+32
+R113
+!i10b 1
+Z119 !s108 1570992722.000000
+Z120 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/nreg.vhd|
+Z121 !s107 U:/WorkSpaces/CPRe381/Project Part A/nreg.vhd|
+!i113 1
+R11
+R12
+Astructure
+R2
+R3
+DEx4 work 4 nreg 0 22 iDOX=g]E`nj3bCS9IMhSa2
+l41
+L29
+VMBb`IeAW7zg06g0dS]6n13
+!s100 [E;[FD]S:6cgW:SlDRRBo0
+R6
+32
+R113
+!i10b 1
+R119
+R120
+R121
+!i113 1
+R11
+R12
+Eorg2
+R21
+R2
+R3
+R0
+Z122 8U:/WorkSpaces/CPRe381/Project Part A/org2.vhd
+Z123 FU:/WorkSpaces/CPRe381/Project Part A/org2.vhd
+l0
+L23
+V[C`FCj=kL0CTBYLlbjJzD3
+!s100 bGQ1F9eW^Q17OoL9h4g7z2
+R6
+32
+R113
+!i10b 1
+R119
+Z124 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/org2.vhd|
+Z125 !s107 U:/WorkSpaces/CPRe381/Project Part A/org2.vhd|
+!i113 1
+R11
+R12
+Adataflow
+R2
+R3
+R43
+l32
+L31
+VNHGn>Kh:]BEh4o]ImiG<d3
+!s100 h5_AzR3TdRA0a_K=dQ>mI2
+R6
+32
+R113
+!i10b 1
+R119
+R124
+R125
+!i113 1
+R11
+R12
+Eprocessor
+Z126 w1570995045
+R71
+R2
+R3
+R0
+Z127 8U:/WorkSpaces/CPRe381/Project Part A/processor.vhd
+Z128 FU:/WorkSpaces/CPRe381/Project Part A/processor.vhd
+l0
+L8
+V98hfUJChDIjC7IAVdV1Tg2
+!s100 b[dU<C2a1NalbE[9ac^B52
+R6
+32
+Z129 !s110 1570995058
+!i10b 1
+Z130 !s108 1570995058.000000
+Z131 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/processor.vhd|
+Z132 !s107 U:/WorkSpaces/CPRe381/Project Part A/processor.vhd|
+!i113 1
+R11
+R12
+Astructure
+R71
+R2
+R3
+Z133 DEx4 work 9 processor 0 22 98hfUJChDIjC7IAVdV1Tg2
+l75
+L26
+ViHz;l6jzhcJJa;B^XgnTL2
+!s100 Je1VBim2k5k>8W=MXNT`Z2
+R6
+32
+R129
+!i10b 1
+R130
+R131
+R132
+!i113 1
+R11
+R12
+Eregfile
+Z134 w1570984612
+R2
+R3
+R0
+Z135 8U:/WorkSpaces/CPRe381/Project Part A/regFile.vhd
+Z136 FU:/WorkSpaces/CPRe381/Project Part A/regFile.vhd
+l0
+L21
+V:80oY<0?AC@IEA_GFM_<K0
+!s100 RV4@6A5mKPR1_2mPN:ULY2
+R6
+32
+R113
+!i10b 1
+R119
+Z137 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/regFile.vhd|
+Z138 !s107 U:/WorkSpaces/CPRe381/Project Part A/regFile.vhd|
+!i113 1
+R11
+R12
+Astructure
+R2
+R3
+DEx4 work 7 regfile 0 22 :80oY<0?AC@IEA_GFM_<K0
+l63
+L29
+VdDZE_]zC=?3bK<OE0X][m3
+!s100 F3;6;HhfLA4:dMZHXPnOA1
+R6
+32
+R113
+!i10b 1
+R119
+R137
+R138
+!i113 1
+R11
+R12
+Esetlessthan32b
+R90
+R2
+R3
+R0
+Z139 8U:/WorkSpaces/CPRe381/Project Part A/setLessThan32b.vhd
+Z140 FU:/WorkSpaces/CPRe381/Project Part A/setLessThan32b.vhd
+l0
+L5
+VanV=Kz^:h3Ecc6CD`mBzV0
+!s100 XfIblU5iEiK?cOiIN^A5<1
+R6
+32
+R113
+!i10b 1
+R119
+Z141 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/setLessThan32b.vhd|
+Z142 !s107 U:/WorkSpaces/CPRe381/Project Part A/setLessThan32b.vhd|
+!i113 1
+R11
+R12
+Aprocessor
+R2
+R3
+DEx4 work 14 setlessthan32b 0 22 anV=Kz^:h3Ecc6CD`mBzV0
+l11
+L10
+V]6JGY3@aF906YJ6kj9d030
+!s100 NLBEnUjUfYzIBGZo[JJH20
+R6
+32
+Z143 !s110 1570992723
+!i10b 1
+R119
+R141
+R142
+!i113 1
+R11
+R12
+Esub1b
+R90
+R2
+R3
+R0
+Z144 8U:/WorkSpaces/CPRe381/Project Part A/sub1b.vhd
+Z145 FU:/WorkSpaces/CPRe381/Project Part A/sub1b.vhd
+l0
+L5
+VOWaDK<fQ=YQkTRRmfK9=?3
+!s100 iZPYk7nCcMAjCE@3NImZF3
+R6
+32
+R143
+!i10b 1
+Z146 !s108 1570992723.000000
+Z147 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/sub1b.vhd|
+Z148 !s107 U:/WorkSpaces/CPRe381/Project Part A/sub1b.vhd|
+!i113 1
+R11
+R12
+Astructural
+R2
+R3
+R45
+l12
+L11
+VE8]UmWVjYj^O;;Mh7V8j80
+!s100 N_KlMihH<mi2A7lCi9P9h3
+R6
+32
+R143
+!i10b 1
+R146
+R147
+R148
+!i113 1
+R11
+R12
+Etb_processor
+Z149 w1570982734
+R71
+R2
+R3
+R0
+Z150 8U:/WorkSpaces/CPRe381/Project Part A/tb_processor.vhd
+Z151 FU:/WorkSpaces/CPRe381/Project Part A/tb_processor.vhd
+l0
+L5
+VGVjSnK@SzXhnHGjDRn?iK0
+!s100 k6hiGcP5M]ZihHU_5azGo3
+R6
+32
+R143
+!i10b 1
+R146
+Z152 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/tb_processor.vhd|
+Z153 !s107 U:/WorkSpaces/CPRe381/Project Part A/tb_processor.vhd|
+!i113 1
+R11
+R12
+Astructure
+R71
+R2
+R3
+DEx4 work 12 tb_processor 0 22 GVjSnK@SzXhnHGjDRn?iK0
+l32
+L14
+VhVXIWQkSZ:m9U^Mkk?S>f3
+!s100 1EPbh;4<`6Dfe_CcR7dG:3
+R6
+32
+R143
+!i10b 1
+R146
+R152
+R153
+!i113 1
+R11
+R12
+Etwo2one
+Z154 w1570982604
+R2
+R3
+R0
+Z155 8U:/WorkSpaces/CPRe381/Project Part A/2to1mux.vhd
+Z156 FU:/WorkSpaces/CPRe381/Project Part A/2to1mux.vhd
+l0
+L12
+Vo@Cek:d]=zA58cNDeGUC;1
+!s100 FUJzX`n8fNeHQLLank9f_1
+R6
+32
+R7
+!i10b 1
+R8
+Z157 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/2to1mux.vhd|
+Z158 !s107 U:/WorkSpaces/CPRe381/Project Part A/2to1mux.vhd|
+!i113 1
+R11
+R12
+Astructure
+R2
+R3
+R41
+l41
+L21
+V4SSI@lJ`h<lQ>;3]82lz91
+!s100 =Ojcgfe1nUhD3b:biZ^VL3
+R6
+32
+R7
+!i10b 1
+R8
+R157
+R158
+!i113 1
+R11
+R12
+Exorg2
+R21
+R2
+R3
+R0
+Z159 8U:/WorkSpaces/CPRe381/Project Part A/xorg2.vhd
+Z160 FU:/WorkSpaces/CPRe381/Project Part A/xorg2.vhd
+l0
+L23
+V;hb`C0MKik;h36`3`SzM60
+!s100 [hI[mXFH4_j16U;>U1Lfn2
+R6
+32
+Z161 !s110 1570992724
+!i10b 1
+R146
+Z162 !s90 -reportprogress|300|-work|work|U:/WorkSpaces/CPRe381/Project Part A/xorg2.vhd|
+Z163 !s107 U:/WorkSpaces/CPRe381/Project Part A/xorg2.vhd|
+!i113 1
+R11
+R12
+Adataflow
+R2
+R3
+R44
+l32
+L31
+VbmLohbkYjJQ`?EHUY>LoL1
+!s100 Z6[FAPS4fBLB`F?OO<AY72
+R6
+32
+R161
+!i10b 1
+R146
+R162
+R163
+!i113 1
+R11
+R12

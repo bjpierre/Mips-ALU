@@ -1,0 +1,12 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity FullAddNbit is
+	generic(N : integer := 32);
+	port( inputa : in std_logic_vector(N-1 downto 0);
+	      inputb : in std_logic_vector(N-1 downto 0);
+	      carry : in std_logic;
+	      sum : out in std_logic_vector(N-1 downto 0);
+	      carry_out : out std_logic);
+
+end FullAddNbit;

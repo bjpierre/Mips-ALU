@@ -1,0 +1,54 @@
+----MipsProcessor
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity MipsProcessor is
+	port( imin : in std_logic_vector(31 downto 0);
+	      nAdd_Sub,alusrc, reset, clk,wen : in std_logic;
+	      readAdda, readAddB, writeAdd : in std_logic_vector(4 downto 0));
+end MipsProcessor;
+
+architecture structure of MipsProcessor is
+
+component addsubwalusrc is
+	generic(N : integer := 32);
+	port( rega,regb,imin : in std_logic_vector(N-1 downto 0);
+	      nAdd_Sub,alusrc : in std_logic;
+	      outp : out std_logic_vector(N-1 downto 0);
+	      carry_out : out std_logic);
+
+end component;
+
+component MipsReg is
+	port(clk,reset,wen : in std_logic;
+		 wd : in std_logic_vector(31 Downto 0);
+		 rt : out std_logic_vector(31 downto 0);
+		 rs : out std_logic_vector(31 downto 0);
+		 wloc, rloca, rlocb : in std_logic_vector(4 downto 0));
+end component;
+
+signal aluoutput, rega,regb : std_logic_vector(31 downto 0);
+signal carryout : std_logic;
+
+begin
+
+ mipReg : MipsReg
+	port MAP(clk => clk,
+		reset => reset,
+		wen => wen,
+		wd => aluoutput,
+		rt => rega,
+		rs => regb,
+		wloc => writeAdd,
+		rloca => readAdda,
+		rlocb => readAddb);
+
+ alu: addsubwalusrc
+	port MAP(rega => rega,
+		regb => regb,
+		imin => imin,
+  	        nAdd_Sub => nAdd_Sub,
+                alusrc => alusrc,
+	        outp => aluoutput,
+	        carry_out =>carryout);
+end structure;

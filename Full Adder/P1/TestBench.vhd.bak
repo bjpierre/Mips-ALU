@@ -1,0 +1,19 @@
+
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+
+entity tb is
+	generic(N : integer := 32);
+	port(input : in std_logic_vector(N-1 downto 0);
+	     output_a : out std_logic_vector(N-1 downto 0);
+	     output_b : out std_logic_vector(N-1 downto 0));
+end tb;
+
+architecture structure of tb is
+
+begin
+HA1 : entity work.ones_com port map (input, output_a);
+HA2 : entity work.ones_com_struct port map(input, output_b);
+end structure;

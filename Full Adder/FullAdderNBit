@@ -1,0 +1,34 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity FullAddNBit is
+	generic(N : integer := 32);
+	port( inputa : in std_logic_vector(N-1 downto 0);
+	      inputb : in std_logic_vector(N-1 downto 0);
+	      carry : in std_logic;
+	      sum : out in std_logic_vector(N-1 downto 0);
+	      carry_out : out std_logic);
+
+end FullAddNBit;
+
+architecture structure of FullAddNBit is
+component FullAdder
+	port( inputa : in std_logic;
+	      inputb : in std_logic;
+	      carry : in std_logic;
+	      sum : out std_logic;
+	      carry_out : out std_logic);
+end component;
+
+generate
+signal carrysig : std_logic;
+G1: for i in 0 to N-1 generate
+	adder1 : FullAdder
+		port map(inputa => ina(i),
+			 inputb => inb(i),
+			 carry => carrysig,
+			 sum => sum(i),
+			 carry_out => carrysig); 
+end generate;
+
+end structure;

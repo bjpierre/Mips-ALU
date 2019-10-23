@@ -1,0 +1,104 @@
+---Processor tb---
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity Processortb is
+end Processortb;
+
+architecture behave of Processortb is
+	signal imin : std_logic_vector(31 downto 0);
+	signal nAdd_Sub,alusrc, reset, wen, clk : std_logic;
+	signal readAdda, readAddB, writeAdd : std_logic_vector(4 downto 0);
+begin
+HA1 : entity work.MipsProcessor port map (imin, nAdd_Sub, alusrc, reset, clk,wen, readAdda, readAddb, writeAdd);
+process is 
+ begin
+ imin <= x"00000000";
+ nAdd_Sub <= '0';
+ alusrc <= '0';
+ reset <= '1';
+ wen<= '1';
+ readAdda <= b"00000";
+ readAddb <= b"00000";
+ writeAdd <= b"00000";
+ clk <='1';
+ wait for 100 ns;
+ clk <= '0';
+ wait for 100 ns;
+ reset <= '0';
+ alusrc <='1';
+ readAdda <= b"00000";
+ writeAdd <= b"00000";
+ imin <=x"00000001";
+ wait for 100 ns;
+ clk <='1';
+ wait for 100 ns;
+ clk <= '0';
+ readAdda <= b"00001";
+ writeAdd <= b"00001";
+ imin <= x"00000002";
+ wait for 100 ns;
+ clk <='1';
+ wait for 100 ns;
+ clk <= '0';
+ readAdda <= b"00010";
+ writeAdd <= b"00010";
+ imin <= x"00000003";
+ wait for 100 ns;
+ clk <='1';
+ wait for 100 ns;
+ clk <= '0';
+ readAdda <= b"00011";
+ writeAdd <= b"00011";
+ imin <= x"00000004";
+ wait for 100 ns;
+ clk <='1';
+ wait for 100 ns;
+ clk <= '0';
+ readAdda <= b"00100";
+ writeAdd <= b"00100";
+ imin <= x"00000005";
+ wait for 100 ns;
+ clk <='1';
+ wait for 100 ns;
+ clk <= '0';
+ readAdda <= b"00101";
+ writeAdd <= b"00101";
+ imin <= x"00000006";
+ wait for 100 ns;
+ clk <='1';
+ wait for 100 ns;
+ clk <= '0';
+ readAdda <= b"00111";
+ writeAdd <= b"00111";
+ imin <= x"00000007";
+ wait for 100 ns;
+ clk <='1';
+ wait for 100 ns;
+ clk <= '0';
+ readAdda <= b"01000";
+ writeAdd <= b"01000";
+ imin <= x"00000008";
+ wait for 100 ns;
+ clk <='1';
+ wait for 100 ns;
+ clk <= '0';
+ readAdda <= b"01001";
+ writeAdd <= b"01001";
+ imin <= x"00000009";
+ wait for 100 ns;
+ clk <='1';
+ wait for 100 ns;
+ clk <= '0';
+ readAdda <= b"01010";
+ writeAdd <= b"01010";
+ imin <= x"0000000A";
+ wait for 100 ns;
+ clk <='1';
+ wait for 100 ns;
+ clk <= '0';
+ wen <='0';
+
+end process;
+end behave;

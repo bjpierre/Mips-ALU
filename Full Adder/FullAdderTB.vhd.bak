@@ -1,0 +1,21 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity FullAdderTB is
+	generic(N : integer := 32);
+	port( inputa : in std_logic_vector(N-1 downto 0);
+	      inputb : in std_logic_vector(N-1 downto 0);
+	      carry : in std_logic;
+	      outputA : out std_logic_vector(N-1 downto 0);
+	      carry_out_A : out std_logic;
+	      outputB : out std_logic_vector(N-1 downto 0);
+	      carry_out_b : out std_logic);
+end FullAdderTB;
+
+architecture structure of FullAdderTB is
+
+begin
+HA1 : entity work.FullAddNBitDataFlow port map (inputa,inputb, carry, outputa, carry_out_A);
+HA2 : entity work.FullAdderNBit port map(inputa, inputb, carry, outputb, carry_out_B);
+
+end structure;

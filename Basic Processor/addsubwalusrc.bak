@@ -1,0 +1,4 @@
+-----Adding that tasty ALUSRC to a full add sub-----
+
+library IEEE;
+use IEEE.std_logic_1164.all;

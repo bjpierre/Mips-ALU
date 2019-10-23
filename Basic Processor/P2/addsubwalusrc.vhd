@@ -1,0 +1,50 @@
+-----Adding that tasty ALUSRC to a full add sub-----
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity addsubwalusrc is
+	generic(N : integer := 32);
+	port( rega,regb,imin : in std_logic_vector(N-1 downto 0);
+	      nAdd_Sub,alusrc : in std_logic;
+	      outp : out std_logic_vector(N-1 downto 0);
+	      carry_out : out std_logic);
+
+end addsubwalusrc;
+
+architecture structure of addsubwalusrc is
+
+component FullAddSub is
+	generic(N : integer := 32);
+	port( ina : in std_logic_vector(N-1 downto 0);
+	      inb : in std_logic_vector(N-1 downto 0);
+	      nAdd_Sub : in std_logic;
+	      outp : out std_logic_vector(N-1 downto 0);
+	      carry_out : out std_logic);
+
+end component;
+
+component NBitMux
+	port( ina : in std_logic_vector(N-1 downto 0);
+	      inb : in std_logic_vector(N-1 downto 0);
+	      sel : in std_logic;
+	      outp : out std_logic_vector(N-1 downto 0));
+end component;
+	signal muxout : std_logic_vector(N-1 downto 0);
+begin
+ mux : NBitMux
+	port MAP(ina => regb,
+	      inb => imin,
+	      sel => alusrc,
+	      outp => muxout);
+
+ logic :  FullAddSub
+	port MAP(ina => rega,
+	      inb => muxout,
+	      nAdd_Sub => nAdd_Sub,
+	      outp => outp,
+	      carry_out => carry_out);
+
+
+
+end structure;
