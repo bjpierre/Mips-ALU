@@ -85,7 +85,7 @@ architecture structure of MIPS_Processor is
 	port(
 	clk,reset,wEnable : in std_logic;
 	writeTo, readFrom1, readFrom2 : in std_logic_vector(4 downto 0);
-	out_r1,out_r2 : out std_logic_vector(N-1 downto 0);
+	out_r1,out_r2, v0 : out std_logic_vector(N-1 downto 0);
 	writeData : in std_logic_vector(N-1 downto 0));
 	end component;
 
@@ -105,6 +105,7 @@ architecture structure of MIPS_Processor is
 	ctrl: in std_logic;
 	outp: out std_logic_vector(31 downto 0));
 	end component;
+
 
 	component nmux
 	port(i_A : in std_logic_vector(N-1 downto 0);
@@ -132,6 +133,7 @@ architecture structure of MIPS_Processor is
 			carry_out : out std_logic);
 
 	end component;
+	
   
  --our signals
   signal s_imm : std_logic_vector(N-1 downto 0);
@@ -155,21 +157,6 @@ architecture structure of MIPS_Processor is
 begin
 
   -- TODO: This is required to be your final input to your instruction memory. This provides a feasible method to externally load the memory module which means that the synthesis tool must assume it knows nothing about the values stored in the instruction memory. If this is not included, much, if not all of the design is optimized out because the synthesis tool will believe the memory to be all zeros.
-
-  with iInstLd select
-    s_IMemAddr <= s_NextInstAddr when '0',
-      iInstAddr when others;
-
-	rstPRC : process(iRst,iCLK)
-	begin
-		if(iRst = '1') then
-			s_NextInstAddr <= x"00400000";
-		else
-			s_NextInstAddr <= s_pcAdder;
-		end if;
-	end process;
-	  
-
 
 
   IMem: mem
@@ -219,7 +206,9 @@ begin
 			readFrom2 => s_readFrom2,
 			writeData => s_RegWrData,
 			out_r1 => s_RegToA,
-			out_r2 => s_RegToB);
+			out_r2 => s_RegToB,
+			v0 => v0);
+			
 		
 	oALU:alu32
 		port MAP(
@@ -234,6 +223,21 @@ begin
 		o_F => s_aluToMux);
 		
   -- TODO: Implement the rest of your processor below this comment! 
+    with iInstLd select
+    s_IMemAddr <= s_NextInstAddr when '0',
+      iInstAddr when others;
+
+	rstPRC : process(iRst,iCLK,s_Halt)
+	begin
+		if(iRst = '1') then
+			s_NextInstAddr <= x"003FFFFC";
+		elsif(falling_Edge(iClk)) then
+			s_NextInstAddr <= s_pcAdder;
+		end if;
+
+	end process;
+	  
+
 
 	Decoder : IDecode
 		port MAP(
