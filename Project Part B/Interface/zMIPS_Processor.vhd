@@ -78,7 +78,9 @@ architecture structure of MIPS_Processor is
 		--Extend--
 		ExtendCtrl	: out std_logic;			--
 		ALUSrc		: out std_logic;			--
-		ALUCtrl		: out std_logic_vector(3 downto 0));	--
+		ALUCtrl		: out std_logic_vector(3 downto 0);
+		LuiCTRL		: out std_logic;
+		VShift : out std_logic);	
 	end component;
 	
 	component regFile
@@ -153,6 +155,12 @@ architecture structure of MIPS_Processor is
   signal s_ExtendCtrl : std_logic;
   signal s_ALUSrc : std_logic;
   signal s_pcAdder : std_logic_vector(N-1 downto 0);
+  signal s_LuiCTRL : std_logic;
+  signal s_LuiVal : std_logic_vector(N-1 downto 0);
+  signal s_LuiMux : std_logic_vector(N-1 downto 0);
+  signal s_regHalt : std_logic;
+  signal s_ShiftSizeDec : std_logic_vector(4 downto 0);
+  signal s_VShift : std_logic;
 
 begin
 
@@ -178,6 +186,7 @@ begin
              q    => s_DMemOut);
 
   s_Halt <='1' when (s_Inst(31 downto 26) = "000000") and (s_Inst(5 downto 0) = "001100") and (v0 = "00000000000000000000000000001010") else '0';
+  s_RegWr <= s_regHalt and not(s_Halt);
 
 
 	zeroSignExtender_i : extender632
@@ -186,16 +195,17 @@ begin
 			ctrl => s_ExtendCtrl,
 			outp => s_imm);
 			
-			
+	--Dictates if we are reading from memory or the alu	
 	nmux_i : nmux
 		port MAP(
 		i_A => s_aluToMux,
 		i_B => s_DMemOut,
 		i_S => s_load,
-		o_F => s_RegWrData);
-		
+		o_F => s_LuiMUX);
 		oALUOut <= s_RegWrData;
 		
+
+	--stores all the values of our program registers
 	progReg : regFile
 		port MAP(
 			clk => iCLK,
@@ -209,7 +219,7 @@ begin
 			out_r2 => s_RegToB,
 			v0 => v0);
 			
-		
+	--Does most of our operations
 	oALU:alu32
 		port MAP(
 		inA => s_RegToA,
@@ -224,37 +234,40 @@ begin
 		
   -- TODO: Implement the rest of your processor below this comment! 
     with iInstLd select
-    s_IMemAddr <= s_NextInstAddr when '0',
+    s_IMemAddr <= s_NextInstAddr when '0', --Determines if reseting program counter or going to next instruction
       iInstAddr when others;
 
 	rstPRC : process(iRst,iCLK,s_Halt)
 	begin
 		if(iRst = '1') then
-			s_NextInstAddr <= x"003FFFFC";
-		elsif(falling_Edge(iClk)) then
-			s_NextInstAddr <= s_pcAdder;
+			s_NextInstAddr <= x"00400000"; --Reset to 0x0040000 - 4
+		elsif(rising_Edge(iClk)) then
+			s_NextInstAddr <= s_pcAdder;  --PC + 4
 		end if;
 
 	end process;
 	  
 
-
+	--Takes an instruction from the decoder and breaks it into various control signals
 	Decoder : IDecode
 		port MAP(
 		Instruct => s_Inst,
 		DMemWr => s_DMemWr,
 		load => s_load,
-		RegWr => s_RegWr,
+		RegWr => s_regHalt,
 		ReadA => s_readFrom1,
 		ReadB => s_readFrom2,
 		RegWrAddr => s_RegWrAddr,
-		ShiftSize => s_ShiftSize,
+		ShiftSize => s_ShiftSizeDec,
 		ShiftContrl => s_ShiftContrl,
 		ExtendCtrl => s_ExtendCtrl,
 		ALUSrc => s_ALUSrc,
-		ALUCtrl => s_ALUCtrl);
+		ALUCtrl => s_ALUCtrl,
+		LuiCTRL => s_LUiCTRL,
+		VShift => s_VShift);
 		
 
+	--Adds four to the program counter every cycle
 	pcAdder : FullAddNBitDataFlow
 	port MAP(
 			inputa => s_NextInstAddr,
@@ -262,13 +275,19 @@ begin
 			carry => '0',
 			sum => s_pcAdder,
 			carry_out => open);
-		
+	--Mux to dictate if we are doing an extend or not (used for imediate adding)
 	MuxAluSrc : for i in 0 to n-1 generate
 		s_extnMux(i) <= (s_RegToB(i) and not(s_ALUSrc)) or (s_imm(i) and s_ALUSrc);
 	end generate;
 	
-		
-		
-		
-		
+	--Mux to dictate if we are doing a lui or not
+	s_LuiVal <= s_Inst(15 downto 0) & x"0000";
+	MuxLUI : for i in 0 to n-1 generate
+		s_RegWrData(i) <= (s_LuiMUX(i) and not(s_LUiCTRL)) or (s_LuiVal(i) and s_LUiCTRL);
+	end generate;
+	
+	--Mux to dictate if we do a variable shift or not. Note we use s_ALUSrc to save signal wires
+	ShiftSizeMux : for i in 0 to 4 generate
+		s_ShiftSize(i) <= (s_ShiftSizeDec(i) and not (s_VShift)) or (s_extnMux(i) and s_VShift);
+	end generate;
 end structure;
