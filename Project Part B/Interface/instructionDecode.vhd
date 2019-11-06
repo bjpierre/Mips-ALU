@@ -25,14 +25,20 @@ port(
 	ALUCtrl		: out std_logic_vector(3 downto 0);	--
 	--LUI--
 	LuiCTRL		: out std_logic;
-	VShift		: out std_logic
+	VShift		: out std_logic;
 	
+	--Jump Ctrl--
+	BComp 		: out std_logic;
+	beqCtrl		: out std_logic;
+	jumpCtrl	: out std_logic;
+	JalCtrl		: out std_logic;
+	JregCtrl	: out std_logic
 	
 );
 end IDecode;
 
 architecture structure of IDecode is
-
+signal s_BComp,s_beqCtrl,s_jumpCtrl,s_JalCtrl,s_JregCtrl :std_logic := '0';
 begin
 process(Instruct)
 begin 
@@ -52,6 +58,11 @@ begin
 			ReadB		<= "00000";
 			LuiCTRL 	<= '0';
 			VShift		<= '0';
+			s_BComp <='0';
+			s_beqCtrl <='0';
+			s_jumpCtrl <='0';
+			s_JalCtrl <= '0';
+			s_JregCtrl <= '0';
 		when "001001" =>	--Addiu
 			ALUSrc		<= '1';
 			ALUCtrl		<= "0000";
@@ -66,6 +77,11 @@ begin
 			ReadB		<= "00000";	
 			LuiCTRL 	<= '0';
 			VShift		<= '0';
+			s_BComp <='0';
+			s_beqCtrl <='0';
+			s_jumpCtrl <='0';
+			s_JalCtrl <= '0';
+			s_JregCtrl <= '0';
 		when "001100" =>	--Andi
 			ALUSrc		<= '1';
 			ALUCtrl		<= "0100";
@@ -80,6 +96,11 @@ begin
 			ReadB		<= "00000";
 			LuiCTRL 	<= '0';
 			VShift		<= '0';
+			s_BComp <='0';
+			s_beqCtrl <='0';
+			s_jumpCtrl <='0';
+			s_JalCtrl <= '0';
+			s_JregCtrl <= '0';
 		when "001111" =>	--Lui
 			ALUSrc		<= '1';
 			ALUCtrl		<= "0000";
@@ -94,8 +115,13 @@ begin
 			ReadB		<= "00000";
 			LuiCTRL 	<= '1';
 			VShift		<= '0';
+			s_BComp <='0';
+			s_beqCtrl <='0';
+			s_jumpCtrl <='0';
+			s_JalCtrl <= '0';
+			s_JregCtrl <= '0';
 		when "100011" => 	--Lw
-			ALUSrc		<= '0';
+			ALUSrc		<= '1';
 			ALUCtrl		<= "0000";
 			ShiftSize	<= "00000";
 			RegWr		<= '1';
@@ -103,6 +129,11 @@ begin
 			load		<= '1';
 			ExtendCtrl	<= '0';
 			ShiftContrl	<= "00";
+			s_BComp <='0';
+			s_beqCtrl <='0';
+			s_jumpCtrl <='0';
+			s_JalCtrl <= '0';
+			s_JregCtrl <= '0';
 			RegWrAddr	<= Instruct(20 downto 16);
 			ReadA		<= Instruct(25 downto 21);
 			ReadB		<= Instruct(20 downto 16);
@@ -122,6 +153,11 @@ begin
 			ReadB		<= "00000";
 			LuiCTRL 	<= '0';
 			VShift		<= '0';
+			s_BComp <='0';
+			s_beqCtrl <='0';
+			s_jumpCtrl <='0';
+			s_JalCtrl <= '0';
+			s_JregCtrl <= '0';
 		when "001101" =>	--ori
 			ALUSrc		<= '1';
 			ALUCtrl		<= "0101";
@@ -136,6 +172,11 @@ begin
 			ReadB		<= "00000";
 			LuiCTRL 	<= '0';
 			VShift		<= '0';
+			s_BComp <='0';
+			s_beqCtrl <='0';
+			s_jumpCtrl <='0';
+			s_JalCtrl <= '0';
+			s_JregCtrl <= '0';
 		when "001010" =>	--slti
 			ALUSrc		<= '1';
 			ALUCtrl		<= "0010";
@@ -150,6 +191,11 @@ begin
 			ReadB		<= "00000";
 			LuiCTRL 	<= '0';
 			VShift		<= '0';
+			s_BComp <='0';
+			s_beqCtrl <='0';
+			s_jumpCtrl <='0';
+			s_JalCtrl <= '0';
+			s_JregCtrl <= '0';
 		when "001011" => 	--sltiu
 			ALUSrc		<= '1';
 			ALUCtrl		<= "0010";
@@ -164,8 +210,13 @@ begin
 			ReadB		<= "00000";
 			LuiCTRL 	<= '0';
 			VShift		<= '0';
+			s_BComp <='0';
+			s_beqCtrl <='0';
+			s_jumpCtrl <='0';
+			s_JalCtrl <= '0';
+			s_JregCtrl <= '0';
 		when "101011" => 	--sw
-			ALUSrc		<= '0';
+			ALUSrc		<= '1';
 			ALUCtrl		<= "0000";
 			ShiftSize	<= "00000";
 			RegWr		<= '0';
@@ -178,7 +229,43 @@ begin
 			ReadB		<= Instruct(20 downto 16);	
 			LuiCTRL 	<= '0';
 			VShift		<= '0';
-		when "000000" =>
+			s_BComp <='0';
+			s_beqCtrl <='0';
+			s_jumpCtrl <='0';
+			s_JalCtrl <= '0';
+			s_JregCtrl <= '0';
+		when "000100" => 	--beq
+				ALUSrc		<= '0';
+				ReadA		<= Instruct(25 downto 21);
+				ReadB		<= Instruct(20 downto 16);
+				RegWr		<= '0';
+		   		DMemWr 		<= '0';
+				s_BComp 	<='1';
+				ALUCtrl		<= "0001";
+				ExtendCtrl	<= '1';
+		when "000101" => 	--Bne
+				ALUSrc		<= '0';
+				ReadA		<= Instruct(25 downto 21);
+				ReadB		<= Instruct(20 downto 16);
+				RegWr		<= '0';
+		   		DMemWr 		<= '0';
+				s_BComp 	<='1';
+				s_beqCtrl   <='1';
+				ALUCtrl		<= "0001";
+				ExtendCtrl	<= '1';
+		when "000010" => 	--jump
+				RegWr		<= '0';
+		   		DMemWr 		<= '0';
+				s_jumpCtrl  <= '1';
+				ExtendCtrl	<= '0';
+		when "000011" => 	--Jump and Link
+			   s_JalCtrl 	<='1';
+			   s_jumpCtrl   <='1';
+			   DMemWr 		<= '0';
+			   RegWr		<= '1';
+			   RegWrAddr 	<="11111";
+			   ExtendCtrl	<= '0';
+		when "000000" =>  	--RFuncts
 			if(Instruct(5 downto 0) = "100000") then	--Add
 				ALUSrc		<= '0';
 				ALUCtrl		<= "0000";
@@ -191,7 +278,12 @@ begin
 				RegWrAddr	<= Instruct(15 downto 11);
 				ReadA		<= Instruct(25 downto 21);
 				ReadB		<= Instruct(20 downto 16);
-				VShift		<= '0';				
+				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0) = "100001") then	--Addu
 				ALUSrc		<= '0';
@@ -206,6 +298,11 @@ begin
 				ReadA		<= Instruct(25 downto 21);
 				ReadB		<= Instruct(20 downto 16);
 				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0) = "100100") then	--And
 				ALUSrc		<= '0';
@@ -220,6 +317,11 @@ begin
 				ReadA		<= Instruct(25 downto 21);
 				ReadB		<= Instruct(20 downto 16);
 				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0) = "100111") then	--Nor
 				ALUSrc		<= '0';
@@ -234,6 +336,11 @@ begin
 				ReadA		<= Instruct(25 downto 21);
 				ReadB		<= Instruct(20 downto 16);
 				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0)= "100110") then 	--Xor
 				ALUSrc		<= '0';
@@ -248,6 +355,11 @@ begin
 				ReadA		<= Instruct(25 downto 21);
 				ReadB		<= Instruct(20 downto 16);
 				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0)= "100101") then 	--or
 				ALUSrc		<= '0';
@@ -262,6 +374,11 @@ begin
 				ReadA		<= Instruct(25 downto 21);
 				ReadB		<= Instruct(20 downto 16);
 				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0)= "101010") then 	--slt
 				ALUSrc		<= '0';
@@ -270,12 +387,17 @@ begin
 				RegWr		<= '1';
 		   		DMemWr 		<= '0';
 				load		<= '0';
-				ExtendCtrl	<= '0';
+				ExtendCtrl	<= '1';
 				ShiftContrl	<= "00";
 				RegWrAddr	<= Instruct(15 downto 11);
 				ReadA		<= Instruct(25 downto 21);
 				ReadB		<= Instruct(20 downto 16);
 				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0)= "101011") then		--sltu
 				ALUSrc		<= '0';
@@ -290,6 +412,11 @@ begin
 				ReadA		<= Instruct(25 downto 21);
 				ReadB		<= Instruct(20 downto 16);
 				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0)= "000000") then		--sll
 				ALUSrc		<= '0';
@@ -304,6 +431,11 @@ begin
 				ReadA		<= Instruct(20 downto 16);
 				ReadB		<= Instruct(20 downto 16);
 				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0)= "000010") then		--srl
 				ALUSrc		<= '0';
@@ -318,6 +450,11 @@ begin
 				ReadA		<= Instruct(20 downto 16);
 				ReadB		<= Instruct(20 downto 16);
 				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0)= "000011") then		--sra
 				ALUSrc		<= '0';
@@ -332,6 +469,11 @@ begin
 				ReadA		<= Instruct(20 downto 16);
 				ReadB		<= Instruct(20 downto 16);
 				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0)= "000100") then		--sllv
 				ALUSrc		<= '0';
@@ -346,6 +488,11 @@ begin
 				RegWrAddr	<= Instruct(15 downto 11);
 				ReadA		<= Instruct(20 downto 16);
 				ReadB		<= Instruct(25 downto 21);
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 				
 			end if;
 			if(Instruct(5 downto 0)= "000110") then		--srlv
@@ -361,6 +508,11 @@ begin
 				RegWrAddr	<= Instruct(15 downto 11);
 				ReadA		<= Instruct(20 downto 16);
 				ReadB		<= Instruct(25 downto 21);
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0)= "000111") then		--srav
 				ALUSrc		<= '0';
@@ -375,6 +527,11 @@ begin
 				RegWrAddr	<= Instruct(15 downto 11);
 				ReadA		<= Instruct(20 downto 16);
 				ReadB		<= Instruct(25 downto 21);
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 			end if;
 			if(Instruct(5 downto 0)= "100010") then		--sub
 				ALUSrc		<= '0';
@@ -388,6 +545,11 @@ begin
 				RegWrAddr	<= Instruct(15 downto 11);
 				ReadA		<= Instruct(25 downto 21);
 				ReadB		<= Instruct(20 downto 16);
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
 				VShift		<= '0';
 			end if;
 			if(Instruct(5 downto 0)= "100011") then		--subu
@@ -403,18 +565,31 @@ begin
 				ReadA		<= Instruct(25 downto 21);
 				ReadB		<= Instruct(20 downto 16);
 				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
+			end if;
+			if(Instruct(5 downto 0)= "001000") then	 --jump register
+				ReadA		<= Instruct(25 downto 21);
+				s_jRegCtrl 	<= '1';
+				RegWr		<= '0';
+		   		DMemWr 		<= '0';
 			end if;
 			LuiCTRL 	<= '0';
 		when others => ALUCtrl <= "0000";
 	
-
+	
 	end case;
-
 
 end process;
 
-		
-
+	BComp <= s_BComp;	
+	beqCtrl	<= s_beqCtrl;
+	jumpCtrl <= s_jumpCtrl;
+	JalCtrl	<= s_JalCtrl;
+	JregCtrl <= s_JregCtrl;
 
 
 

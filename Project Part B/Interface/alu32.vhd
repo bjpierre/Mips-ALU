@@ -18,6 +18,7 @@ entity alu32 is
 	     sel : in std_logic_vector(3 downto 0);
 		 shiftSize : in std_logic_vector(4 downto 0);
 		 shiftCtrl : in std_logic_vector(1 downto 0);
+		 signOrUnsign : in std_logic;
 	     overflow, carryOut, zero : out std_logic;
 		 o_F : out std_logic_vector(N-2+1 downto 0));
 end alu32;
@@ -38,6 +39,11 @@ component bigALU
 		carryOut: out std_logic;
 		sum: out std_logic);
 end component;
+component setLessThan32b
+	port(inputA,inputB : in std_logic_vector(31 downto 0);
+		sel : in std_logic;
+	     output : out std_logic);
+end component;
 component finalBits
 	port(
 		inA,inB : in std_logic;
@@ -57,6 +63,7 @@ component barrel32
 end component;
 --signals
 signal barrelsig, outSig : std_logic_vector(N-1 downto 0);
+signal sltOut : std_logic_vector(N-1 downto 0) :=x"00000000";
 signal carrySig : std_logic_vector(N-1 downto 0);
 signal zeroSig,check : std_logic;
 
@@ -89,7 +96,13 @@ end generate;
 		 sum => outSig(31),
 		 V => overflow,
 		 set => zeroSig);
-
+		 
+	slt_i : setLessThan32b
+	port MAP(inputA => inA,
+			inputB => inB,
+			sel => signOrUnsign,
+			output => sltOut(0));	
+	
 	nor32_i : nor32
 	port MAP(inputs => outSig,
 		 output => zero);
@@ -104,7 +117,6 @@ end generate;
 carryOut <= check;
 
 Genny: for i in 0 to N-1 generate
-	o_F(i) <= (outSig(i) and not(sel(3))) or (barrelSig(i) and sel(3));
+	o_F(i) <= (outSig(i) and not(sel(3))) or (barrelSig(i) and sel(3)) or (signOrUnsign and sltOut(i) and sel(1) and not sel(0) and not sel(2) and not sel(3));
 end generate;
-
 end structure;

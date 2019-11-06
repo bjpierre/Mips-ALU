@@ -80,7 +80,12 @@ architecture structure of MIPS_Processor is
 		ALUSrc		: out std_logic;			--
 		ALUCtrl		: out std_logic_vector(3 downto 0);
 		LuiCTRL		: out std_logic;
-		VShift : out std_logic);	
+		VShift : out std_logic;
+		BComp 		: out std_logic;
+		beqCtrl		: out std_logic;
+		jumpCtrl	: out std_logic;
+		JalCtrl		: out std_logic;
+		JregCtrl	: out std_logic);	
 	end component;
 	
 	component regFile
@@ -97,6 +102,7 @@ architecture structure of MIPS_Processor is
 	     	sel : in std_logic_vector(3 downto 0);
 		shiftSize : in std_logic_vector(4 downto 0);
 		shiftCtrl : in std_logic_vector(1 downto 0);
+		signOrUnsign : in std_logic;
 	     	overflow, carryOut, zero : out std_logic;
 		o_F : out std_logic_vector(N-2+1 downto 0));
 	end component;
@@ -161,6 +167,10 @@ architecture structure of MIPS_Processor is
   signal s_regHalt : std_logic;
   signal s_ShiftSizeDec : std_logic_vector(4 downto 0);
   signal s_VShift : std_logic;
+  signal s_dmemInter : std_logic_vector(29 downto 0);
+  --j signals
+  signal s_BComp,s_beqCtrl,s_jumpCtrl,s_JalCtrl	,s_JregCtrl,s_beqRes : std_logic :='0';
+  signal s_JumpMuxOut,s_Shift2out,s_RelOffSet,s_JLocMux,s_JLoc,s_jCtrlOut,s_RegWrDataInter,s_JregCtrlOut : std_logic_vector(31 downto 0) :=x"00000000";
 
 begin
 
@@ -188,7 +198,11 @@ begin
   s_Halt <='1' when (s_Inst(31 downto 26) = "000000") and (s_Inst(5 downto 0) = "001100") and (v0 = "00000000000000000000000000001010") else '0';
   s_RegWr <= s_regHalt and not(s_Halt);
 
+	--Hardwire values for our memwriteing
+	s_DMemData <= s_RegToB;
+	s_DMemAddr <= s_aluToMux(31 downto 0);
 
+	--our extender for immediate input
 	zeroSignExtender_i : extender632
 		port MAP(
 			inp => s_Inst(15 downto 0),
@@ -202,8 +216,12 @@ begin
 		i_B => s_DMemOut,
 		i_S => s_load,
 		o_F => s_LuiMUX);
-		oALUOut <= s_RegWrData;
 		
+		
+		oALUOut <= s_RegWrData;   --s_RegWrDataInter
+		
+	
+
 
 	--stores all the values of our program registers
 	progReg : regFile
@@ -227,6 +245,7 @@ begin
 		sel => s_ALUCtrl,
 		shiftSize => s_ShiftSize,
 		shiftCtrl => s_ShiftContrl,
+		signOrUnsign => s_ExtendCtrl,
 		overflow => s_overflow,
 		carryOut => s_carryOut,
 		zero => s_zero,
@@ -240,9 +259,9 @@ begin
 	rstPRC : process(iRst,iCLK,s_Halt)
 	begin
 		if(iRst = '1') then
-			s_NextInstAddr <= x"00400000"; --Reset to 0x0040000 - 4
+			s_NextInstAddr <= x"00400000"; --Reset to 0x0040000
 		elsif(rising_Edge(iClk)) then
-			s_NextInstAddr <= s_pcAdder;  --PC + 4
+			s_NextInstAddr <= s_JumpMuxOut;  --pc target
 		end if;
 
 	end process;
@@ -264,17 +283,16 @@ begin
 		ALUSrc => s_ALUSrc,
 		ALUCtrl => s_ALUCtrl,
 		LuiCTRL => s_LUiCTRL,
-		VShift => s_VShift);
+		VShift => s_VShift,
+		BComp => s_BComp,
+		beqCtrl	=> s_beqCtrl,
+		jumpCtrl => s_jumpCtrl,
+		JalCtrl	=> s_JalCtrl,
+		JregCtrl => s_JregCtrl);
 		
 
 	--Adds four to the program counter every cycle
-	pcAdder : FullAddNBitDataFlow
-	port MAP(
-			inputa => s_NextInstAddr,
-			inputb => "00000000000000000000000000000100",
-			carry => '0',
-			sum => s_pcAdder,
-			carry_out => open);
+
 	--Mux to dictate if we are doing an extend or not (used for imediate adding)
 	MuxAluSrc : for i in 0 to n-1 generate
 		s_extnMux(i) <= (s_RegToB(i) and not(s_ALUSrc)) or (s_imm(i) and s_ALUSrc);
@@ -283,11 +301,69 @@ begin
 	--Mux to dictate if we are doing a lui or not
 	s_LuiVal <= s_Inst(15 downto 0) & x"0000";
 	MuxLUI : for i in 0 to n-1 generate
-		s_RegWrData(i) <= (s_LuiMUX(i) and not(s_LUiCTRL)) or (s_LuiVal(i) and s_LUiCTRL);
+		s_RegWrDataInter(i) <= (s_LuiMUX(i) and not(s_LUiCTRL)) or (s_LuiVal(i) and s_LUiCTRL);
 	end generate;
 	
 	--Mux to dictate if we do a variable shift or not. Note we use s_ALUSrc to save signal wires
 	ShiftSizeMux : for i in 0 to 4 generate
 		s_ShiftSize(i) <= (s_ShiftSizeDec(i) and not (s_VShift)) or (s_extnMux(i) and s_VShift);
 	end generate;
+	
+	
+	--Below here we have our jump controls
+
+	--IF BEQ and the b is eq or bneq and the b isnt eq
+	s_beqRes <= (s_BComp and (not s_beqCtrl) and s_zero) or (s_BComp and (s_beqCtrl) and (not s_zero)) or s_jumpCtrl;
+
+
+	--pc+4
+	pcAdder : FullAddNBitDataFlow
+	port MAP(
+			inputa => s_NextInstAddr,
+			inputb => "00000000000000000000000000000100",
+			carry => '0',
+			sum => s_pcAdder,
+			carry_out => open);
+
+	--Shift immediate (label) left by 2
+	s_Shift2out <= s_imm(29 downto 0) & "00";
+	
+	--Build relative jump location
+	s_JLoc <= s_pcAdder(31 downto 28) & s_Inst(25 downto 0) & "00";
+	
+
+	--PC+4+offset
+	pcRelCalc : FullAddNBitDataFlow
+	port MAP(
+			inputa => s_pcAdder, --pc+4
+			inputb => s_Shift2out, --immediate shifted
+			carry => '0',
+			sum => s_RelOffSet,
+			carry_out => open);
+
+	--Switch between bcomp jump and R type jump
+	--if jctrl is 0 do a branch, else do a jump
+	JCTRLMUX : for i in 0 to n-1 generate
+		s_jCtrlOut(i) <= (s_RelOffSet(i) and ( not s_jumpCtrl)) or (s_JLoc(i) and s_jumpCtrl);
+	end generate;
+
+	--Mux between pc_adder and s_RelOffSet based on s_beqRes
+	JumpMux : for i in 0 to n-1 generate
+		s_JumpMuxOut(i) <= (s_pcAdder(i) and ( not s_beqRes)) or (s_jCtrlOut(i) and s_beqRes);
+	end generate;
+	
+	--s_JregCtrlOut
+	--switch between s_jCtrlOut and Output from register A
+	JRMUX : for i in 0 to n-1 generate
+		s_JregCtrlOut(i) <= ( s_JumpMuxOut(i) and (not s_JregCtrl)) or ( s_RegToA(i) and s_JregCtrl);
+	end generate;
+	
+	--Load current pc if s_jalCTRL
+	JalMUX : for i in 0 to n-1 generate
+		s_RegWrData(i) <= (s_RegWrDataInter(i) and ( not s_JalCtrl)) or (s_pcAdder(i) and s_JalCtrl);
+	end generate;
+
+	
+
+	--marswork/examples/proj-b_test1.s to run first test
 end structure;
