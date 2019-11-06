@@ -261,7 +261,7 @@ begin
 		if(iRst = '1') then
 			s_NextInstAddr <= x"00400000"; --Reset to 0x0040000
 		elsif(rising_Edge(iClk)) then
-			s_NextInstAddr <= s_JumpMuxOut;  --pc target
+			s_NextInstAddr <= s_JregCtrlOut;  --pc target
 		end if;
 
 	end process;
