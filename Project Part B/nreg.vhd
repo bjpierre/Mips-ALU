@@ -28,7 +28,7 @@ end nreg;
 
 architecture structure of nreg is
 --components
-component dff
+component dffa
 	port(
 		i_CLK        : in std_logic;     -- Clock input
 		i_RST        : in std_logic;     -- Reset input
@@ -40,7 +40,7 @@ end component;
 
 begin
 Gl : for i in 0 to N-1 generate
-	flipflop : dff
+	flipflop : dffa
 	port MAP(i_CLK => clk,
 		i_RST => reset,
 		i_WE => ctl,

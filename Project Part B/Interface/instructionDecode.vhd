@@ -418,7 +418,7 @@ begin
 				s_JalCtrl <= '0';
 				s_JregCtrl <= '0';
 			end if;
-			if(Instruct(5 downto 0)= "000000") then		--sll
+			if(Instruct(5 downto 0)= "000000" and not Instruct = x"0000000C") then		--sll
 				ALUSrc		<= '0';
 				ALUCtrl		<= "1000";
 				ShiftSize	<= Instruct(10 downto 6);
@@ -571,6 +571,25 @@ begin
 				s_JalCtrl <= '0';
 				s_JregCtrl <= '0';
 			end if;
+				if(Instruct = x"0000000C") then		--syscall
+				ALUSrc		<= '0';
+				ALUCtrl		<= "0000";
+				ShiftSize	<= "00000";
+				RegWr		<= '0';
+		   		DMemWr 		<= '0';
+				load		<= '0';
+				ExtendCtrl	<= '0';
+				ShiftContrl	<= "00";
+				RegWrAddr	<= "00000";
+				ReadA		<= Instruct(25 downto 21);
+				ReadB		<= Instruct(20 downto 16);
+				VShift		<= '0';
+				s_BComp <='0';
+				s_beqCtrl <='0';
+				s_jumpCtrl <='0';
+				s_JalCtrl <= '0';
+				s_JregCtrl <= '0';
+			end if;
 			if(Instruct(5 downto 0)= "001000") then	 --jump register
 				ReadA		<= Instruct(25 downto 21);
 				s_jRegCtrl 	<= '1';
@@ -578,7 +597,8 @@ begin
 		   		DMemWr 		<= '0';
 			end if;
 			LuiCTRL 	<= '0';
-		when others => ALUCtrl <= "0000";
+		when others => 
+
 	
 	
 	end case;

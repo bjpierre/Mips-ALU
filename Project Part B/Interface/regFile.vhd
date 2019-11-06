@@ -81,7 +81,7 @@ G2: for i in 0 to N-1 generate
 end generate; 
 	bigMux1 : mux32
 	port MAP(
-	in_1 => regToMux(0),
+	in_1 => x"00000000",
 	in_2 => regToMux(1),
 	in_3 => regToMux(2),
 	in_4 => regToMux(3),
@@ -118,7 +118,7 @@ end generate;
 
 	bigMux2 : mux32
 	port MAP(
-	in_1 => regToMux(0),
+	in_1 => x"00000000",
 	in_2 => regToMux(1),
 	in_3 => regToMux(2),
 	in_4 => regToMux(3),

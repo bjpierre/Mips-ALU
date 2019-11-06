@@ -62,8 +62,7 @@ component barrel32
          o_F          : out std_logic_vector(31 downto 0));
 end component;
 --signals
-signal barrelsig, outSig : std_logic_vector(N-1 downto 0);
-signal sltOut : std_logic_vector(N-1 downto 0) :=x"00000000";
+signal barrelsig, outSig, sltOut : std_logic_vector(N-1 downto 0);
 signal carrySig : std_logic_vector(N-1 downto 0);
 signal zeroSig,check : std_logic;
 
@@ -117,6 +116,9 @@ end generate;
 carryOut <= check;
 
 Genny: for i in 0 to N-1 generate
-	o_F(i) <= (outSig(i) and not(sel(3))) or (barrelSig(i) and sel(3)) or (signOrUnsign and sltOut(i) and sel(1) and not sel(0) and not sel(2) and not sel(3));
+	o_F(i) <= (outSig(i) and not(sel(3))) or (barrelSig(i) and sel(3));
+end generate;
+sltMux: for i in 0 to N-1 generate
+	o_F(i) <= (signOrUnsign and sltOut(i)) or (outSig(i) and not singOrUnsign);
 end generate;
 end structure;

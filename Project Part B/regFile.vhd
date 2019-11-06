@@ -23,7 +23,7 @@ generic(N : integer := 32);
   port(
 	clk,reset,wEnable : in std_logic;
 	writeTo, readFrom1, readFrom2 : in std_logic_vector(4 downto 0);
-	out_r1,out_r2 : out std_logic_vector(N-1 downto 0);
+	out_r1,out_r2,v0 : out std_logic_vector(N-1 downto 0);
 	writeData : in std_logic_vector(N-1 downto 0));
 end regFile;
 architecture structure of regFile is
@@ -77,10 +77,11 @@ G2: for i in 0 to N-1 generate
 		 ctl => wToReg(i),
 		 r1 => regToMux(i),
 		 w1 => writeData);
+		 
 end generate; 
 	bigMux1 : mux32
 	port MAP(
-	in_1 => regToMux(0),
+	in_1 => x"00000000",
 	in_2 => regToMux(1),
 	in_3 => regToMux(2),
 	in_4 => regToMux(3),
@@ -117,7 +118,7 @@ end generate;
 
 	bigMux2 : mux32
 	port MAP(
-	in_1 => regToMux(0),
+	in_1 => x"00000000",
 	in_2 => regToMux(1),
 	in_3 => regToMux(2),
 	in_4 => regToMux(3),
@@ -151,5 +152,6 @@ end generate;
 	in_32 => regToMux(31),
 	sel => readFrom2,
 	out_32 => out_r2);
-
+	
+	v0 <= regToMux(2);
 end structure;
